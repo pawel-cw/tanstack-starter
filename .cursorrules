@@ -1,0 +1,236 @@
+# Cursor AI Rules for TanStack Starter
+
+## Project Context
+
+This is a full-stack TypeScript boilerplate built with:
+
+- **Framework**: TanStack Start + TypeScript
+- **UI**: shadcn/ui + Tailwind CSS v4
+- **Database**: Neon Postgres + Drizzle ORM
+- **Auth**: Better-Auth
+- **i18n**: Lingui (macro-based)
+- **State Management**: TanStack Query
+
+This starter is pre-configured for building modern SaaS applications with built-in internationalization (German, Polish, English).
+
+## Code Standards
+
+### TypeScript
+
+- Use strict mode
+- **Always use `type`, never use `interface`**
+- Avoid `any` - use `unknown` if type is truly unknown
+
+### React Components
+
+- Use function components with hooks
+- Prefer named exports for components
+- Co-locate component files with tests and styles
+- **Use `function` declarations for components** (not `const` arrow functions)
+  - Better debugging: function names appear clearly in stack traces
+  - Hoisting allows flexible file organization
+  - Consistent with TanStack ecosystem and shadcn/ui
+  - Example: `export function Button() { ... }`
+- Props should be typed with `type` (not `interface`)
+
+### File Naming
+
+- Components: `PascalCase.tsx` (e.g., `ScheduleView.tsx`)
+- Utilities: `camelCase.ts` (e.g., `formatDate.ts`)
+- Hooks: `use*.ts` (e.g., `useAuth.ts`)
+- Types: `*.types.ts` (e.g., `schedule.types.ts`)
+- Tests: `*.test.ts` or `*.test.tsx`
+
+### Imports
+
+- Use path aliases: `@/components`, `@/lib`, `@/db`
+- Group imports: external → internal → relative
+- Sort alphabetically within groups
+
+Example:
+
+```typescript
+import { useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
+
+import { Button } from '@/components/ui/button'
+import { db } from '@/db'
+
+import { formatDate } from './utils'
+
+type MyComponentProps = {
+  title: string
+}
+
+export function MyComponent({ title }: MyComponentProps) {
+  const [count, setCount] = useState(0)
+  return <div>{title}: {count}</div>
+}
+```
+
+### Internationalization (i18n)
+
+- **Always** use Lingui macros for user-facing text
+- Use `<Trans>` for JSX content
+- Use `t` macro for plain strings
+- Add `comment` prop for translator context
+
+```typescript
+import { Trans, t } from '@lingui/react/macro'
+
+// Good
+<Trans comment="Button to save schedule">Save Schedule</Trans>
+
+const placeholder = t({
+  message: 'Enter email',
+  comment: 'Input placeholder for email field'
+})
+
+// Bad - hardcoded strings
+<button>Save Schedule</button>
+```
+
+### Database
+
+- Use Drizzle ORM for all queries
+- Define schema in `src/db/schema.ts`
+- Use migrations (don't push schema directly to prod)
+- Use prepared statements for repeated queries
+- Consider multi-tenancy needs (filter by `workspace_id` if applicable)
+
+### Forms & Validation
+
+- Use Zod for all form validation
+- Validate on both client and server
+- Use React Hook Form for complex forms
+- Show inline validation errors
+
+### Error Handling
+
+- Use React Error Boundaries for component errors
+- Return typed errors from server functions
+- Show user-friendly error messages (translated)
+- Log errors with appropriate context
+
+## Git Commits
+
+**Follow the Conventional Commits specification.**
+
+See detailed rules in [.cursor/rules/git-commits.md](.cursor/rules/git-commits.md)
+
+### Quick Format:
+
+```
+<type>(<scope>): <subject>
+```
+
+**Types**: feat, fix, docs, style, refactor, perf, test, chore, ci
+
+**Example**: `feat(auth): add password reset functionality`
+
+## Code Review Checklist
+
+Before marking code as ready:
+
+- [ ] TypeScript types are correct (no `any`)
+- [ ] All user-facing strings use i18n macros
+- [ ] Forms have Zod validation
+- [ ] Error states are handled
+- [ ] Loading states are shown
+- [ ] Mobile responsive (test at 375px width)
+- [ ] Accessible (keyboard navigation, ARIA labels)
+- [ ] No console.logs in production code
+
+## Testing
+
+- Unit tests for utilities and business logic
+- Integration tests for API routes
+- E2E tests for critical user flows
+- Test files co-located with source files
+
+## Documentation
+
+- Add JSDoc comments for complex functions
+- Update README for setup changes
+- Document architectural decisions
+- Keep CHANGELOG.md updated
+
+## Performance
+
+- Use React Query for server state
+- Implement optimistic updates for mutations
+- Lazy load routes with TanStack Router
+- Optimize images (WebP, proper sizing)
+- Monitor bundle size (keep chunks < 200KB)
+
+## Security
+
+- Never commit secrets (.env is gitignored)
+- Validate all inputs server-side
+- Use parameterized queries (Drizzle handles this)
+- Implement rate limiting on auth routes
+- Use HTTPS in production (Vercel handles this)
+
+## Shadcn/ui Components
+
+Install new components using:
+
+```bash
+npx shadcn@latest add <component-name>
+```
+
+Customize in `src/components/ui/` as needed.
+
+## Common Commands
+
+```bash
+# Development
+npm run dev                    # Start dev server
+npm run typecheck              # Check types
+npm run lint                   # Run ESLint
+npm run format                 # Format with Prettier
+
+# Database
+npm run db:push                # Push schema to database
+npm run db:generate            # Generate migrations
+npm run db:studio              # Open Drizzle Studio
+
+# i18n
+npx lingui extract             # Extract messages
+npx lingui compile             # Compile messages
+```
+
+## AI Assistant Guidelines
+
+When generating code:
+
+1. Follow all TypeScript and React best practices above
+2. Use Lingui macros for any user-facing text
+3. Include proper error handling
+4. Add TypeScript types (no `any`)
+5. Make it responsive and accessible
+6. Follow the project structure
+7. Keep code modular and reusable
+
+When suggesting commits:
+
+1. Use conventional commit format
+2. Keep subject line ≤72 characters (max 100)
+3. Use imperative mood
+4. Include scope when relevant
+5. Suggest body text for complex changes
+
+## Customizing This Boilerplate
+
+When starting a new project:
+
+1. Update `package.json` name and description
+2. Replace this file with project-specific rules
+3. Update page title in `src/routes/__root.tsx`
+4. Customize color scheme in `src/styles.css`
+5. Update translation files for your target languages
+6. Configure database schema for your needs
+
+---
+
+**Remember**: Code is written once but read many times. Optimize for clarity and maintainability.

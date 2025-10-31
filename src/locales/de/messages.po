@@ -1,0 +1,54 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2025-10-31 18:45+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: de\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/routes/index.tsx:17
+msgid "A modern, production-ready boilerplate for building full-stack applications"
+msgstr ""
+
+#: src/routes/index.tsx:83
+msgid "Backend"
+msgstr ""
+
+#: src/routes/index.tsx:123
+msgid "Built with ❤️ for modern full-stack development"
+msgstr ""
+
+#: src/routes/index.tsx:27
+msgid "Core Features"
+msgstr ""
+
+#: src/routes/index.tsx:66
+msgid "Frontend"
+msgstr ""
+
+#: src/routes/index.tsx:100
+msgid "Getting Started"
+msgstr ""
+
+#: src/routes/index.tsx:9
+#~ msgid "Hello World"
+#~ msgstr "Hallo Welt"
+
+#: src/routes/index.tsx:14
+msgid "TanStack Starter"
+msgstr ""
+
+#: src/routes/index.tsx:60
+msgid "Tech Stack"
+msgstr ""
+
+#: src/routes/index.tsx:106
+msgid "Visit <0>README.md</0> for detailed setup instructions"
+msgstr ""
