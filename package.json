@@ -64,7 +64,7 @@
     "@types/ws": "^8.18.1",
     "@vitejs/plugin-react": "^5.1.0",
     "dotenv": "^17.2.3",
-    "jsdom": "^27.0.1",
+    "jsdom": "^27.1.0",
     "prettier": "^3.6.2",
     "typescript": "^5.9.3",
     "vite": "^7.1.12",
